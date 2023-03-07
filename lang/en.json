@@ -1,0 +1,20 @@
+{
+	"terminalMessages": {
+		"onStartup": "logged up as @{0} (uid: {1})",
+		"commandRaised": "raised command: {0}[{1}]"
+	},
+
+	"errors": {
+		"missingArgument": "⚠️ missing argument\n- usage: <code>{0}</code>",
+		"unexpectedError": "❌ error bruh"
+	},
+
+	"commands": {
+		"ping": {
+			"header": "🏓 Pong",
+			"passesCounter": "  <i>({0}/{1} passes)</i>",
+			"singleTestResults": "- response in <b>{0}</b>ms",
+			"multipleTestResults": "- average: <b>{0}</b>ms\n- min/max: <b>{1}</b>ms/<b>{2}</b>ms"
+		}
+	}
+}
