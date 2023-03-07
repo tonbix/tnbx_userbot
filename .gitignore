@@ -1,6 +1,10 @@
 # Visual studio code
 .vscode/
 
+# Pyrogram
+*.session
+*.session-journal
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
