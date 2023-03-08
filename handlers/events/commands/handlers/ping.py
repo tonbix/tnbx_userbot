@@ -1,16 +1,27 @@
 from time import time
 
+from asyncio import run
+
 from lang import get_lang
+
+
+# gets language
+lang = run(get_lang())
 
 
 class Ping:
 	def __init__(self) -> None:
 		self.enabled: bool = True
 		self.aliases: tuple = ("ping", )
-		self.usage: str = "-/<passes amount>"
-		self.description: str = "calculates the time required to edit the message"
+		self.usage: str = "-/{{passes amount}}"
+		self.description: str = lang["commands"]["ping"]["description"]
+
 
 	async def function(self, message, args) -> None:
+		"""
+		calculates the time required to edit the telegram message
+		with no arguments return single-test result. With number as first arg returns multi-test result where amount of passes is first arg
+		"""
 		passes = 1
 		responseTime = []
 
@@ -19,8 +30,6 @@ class Ping:
 				passes = int(args[0])
 		except Exception:
 			pass
-
-		lang = await get_lang()
 
 		for i in range(passes):
 			start = time()
@@ -45,7 +54,7 @@ class Ping:
 					responseTime[-1])
 			await message.edit(response_text)
 		else:
-			averageResult = round(sum(responseTime)/len(responseTime), 2)
+			averageResult = round(sum(responseTime) / len(responseTime), 2)
 			minResult = min(responseTime)
 			maxResult = max(responseTime)
 

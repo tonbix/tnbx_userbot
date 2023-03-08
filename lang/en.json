@@ -1,5 +1,6 @@
 {
 	"terminalMessages": {
+		"selectedAccount": "using \"{0}\" account",
 		"onStartup": "logged up as @{0} (uid: {1})",
 		"commandRaised": "raised command: {0}[{1}]"
 	},
@@ -11,10 +12,19 @@
 
 	"commands": {
 		"ping": {
+			"description": "Calculates the time required to edit the message",
+
 			"header": "🏓 Pong",
 			"passesCounter": "  <i>({0}/{1} passes)</i>",
 			"singleTestResults": "- response in <b>{0}</b>ms",
 			"multipleTestResults": "- average: <b>{0}</b>ms\n- min/max: <b>{1}</b>ms/<b>{2}</b>ms"
+		},
+		"help": {
+			"description": "Reveals this message",
+
+			"header": "📑 <b>Userbot's help message:</b>",
+			"settingsInfo": "Current prefix: \"{0}\"",
+			"commandCard": "⌨️ <b>{0}</b> - {1}\n - usage: <code>{2}</code>"
 		}
 	}
 }

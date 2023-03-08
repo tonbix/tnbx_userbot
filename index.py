@@ -11,46 +11,61 @@ import json
 from dotenv import load_dotenv
 from os import getenv
 
+import asyncio
+import uvloop
+
 from utils import configure_loguru
 from lang import get_lang
 from handlers import start_handlers
 
 """
 TODO:
-[x] language manager
-[x] setup function
-[x] handlers starter
-[x] commands loader
-[x] command structure
-[x] commands handler
-[-] help command
+[x] help command
 [-] updater
-[x] configure loguru logger
-[x] replace log prints with loguru ones
 """
 
+# installs uvloop
+uvloop.install()
+
+# loads dotenv
 load_dotenv(dotenv_path="data/.env")
 
+# loads settings
 config = ConfigParser()
 config.read("data/settings.ini")
 
+# gets account credentials by key from settings
 accountUsername = config["Authorization"]["account"]
 accountCredential = json.loads(str(getenv("TG_CREDENTIALS")))[accountUsername]
 
+# gets language dict for terminal logging
+with asyncio.Runner(loop_factory=uvloop.new_event_loop) as runner:
+    terminalLang = runner.run(get_lang(systemMessage=True))
+
+# shows selected in settings account username
+print(terminalLang["terminalMessages"]["selectedAccount"].format(
+    accountUsername))
+
+# initializes client
 client = Client(accountUsername, accountCredential["apiId"],
                 accountCredential["apiHash"], parse_mode=ParseMode.HTML)
 
-
+# runs loguru configuration
 configure_loguru()
 
+# starts all handlers
 start_handlers(client)
 
 
 async def run_client() -> None:
+    """
+    function that runs bot client
+    executes start(), idle(), stop() and prints some account info in terminal after login
+    """
     await client.start()
 
+    # gets user from client and prints some information about selected account
     clientUser = await client.get_me()
-    terminalLang = await get_lang(systemMessage=True)
     print(terminalLang["terminalMessages"]["onStartup"].format(
         clientUser.username, clientUser.id), end="\n\n")
 

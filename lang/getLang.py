@@ -4,10 +4,11 @@ from json import load
 
 
 async def get_lang(language=None, systemMessage=False) -> dict:
+	# reads config
 	config = ConfigParser()
-
 	config.read("data/settings.ini")
 
+	# selects language based on input arguments and settings file
 	if language:
 		selectedLanguage = language
 	elif systemMessage:
@@ -15,5 +16,6 @@ async def get_lang(language=None, systemMessage=False) -> dict:
 	else:
 		selectedLanguage = config["Language"]["selectedLanguage"]
 
-	with open(f"lang/{selectedLanguage}.json", "r") as langFile:
+	# gets and returns selected language from file
+	with open(f"lang/{selectedLanguage.lower()}.json", "r") as langFile:
 		return load(langFile)
