@@ -2,12 +2,13 @@
 	"terminalMessages": {
 		"selectedAccount": "используется аккаунт \"{0}\"",
 		"onStartup": "запущен как @{0} (uid: {1})",
-		"commandRaised": "вызвана команда: {0}[{1}]"
+		"commandRaised": "вызвана команда: {0}[{1}]",
+		"unexpectedError": "неизвестная ошибка"
 	},
 
 	"errors": {
 		"missingArgument": "⚠️ отсутствует аргумент\n- синтаксис: <code>{0}</code>",
-		"unexpectedError": "❌ шашибка"
+		"unexpectedError": "❌ шашибка\n- <code>{0}</code>"
 	},
 
 	"commands": {

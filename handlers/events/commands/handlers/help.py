@@ -27,7 +27,7 @@ class Help:
 		"""
 		shows help message with all commands and some settings
 		"""
-		# commands list
+		# list of commands
 		commands = [self, ping.Ping()]
 
 		commandsCards = []

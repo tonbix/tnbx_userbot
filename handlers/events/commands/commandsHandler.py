@@ -1,5 +1,7 @@
 from configparser import ConfigParser
 
+import asyncio
+
 from loguru import logger
 
 from lang import get_lang
@@ -34,7 +36,8 @@ async def commands_handler(message) -> None:
 		args = splittedText[1:]
 
 		# gets language dict
-		lang = await get_lang(systemMessage=True)
+		lang = await get_lang()
+		terminalLang = await get_lang(systemMessage=True)
 
 		# list of commands and its arguments
 		commandsList = [
@@ -47,10 +50,10 @@ async def commands_handler(message) -> None:
 			if commandObj[0].enabled and command in commandObj[0].aliases:
 				try:
 					# runs command and logs it
-					await commandObj[0].function(*commandObj[1])
-					logger.info(lang["terminalMessages"]["commandRaised"].format(
+					logger.info(terminalLang["terminalMessages"]["commandRaised"].format(
 						command, ", ".join(args)))
+					await commandObj[0].function(*commandObj[1])
 				except Exception as e:
 					# logs error 
-					await message.edit(lang["errors"]["unexpectedError"])
-					logger.exception(lang["errors"]["unexpectedError"])
+					await message.edit(lang["errors"]["unexpectedError"].format(e))
+					logger.exception(terminalLang["terminalMessages"]["unexpectedError"])

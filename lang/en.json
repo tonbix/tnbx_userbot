@@ -2,12 +2,13 @@
 	"terminalMessages": {
 		"selectedAccount": "using \"{0}\" account",
 		"onStartup": "logged up as @{0} (uid: {1})",
-		"commandRaised": "raised command: {0}[{1}]"
+		"commandRaised": "raised command: {0}[{1}]",
+		"unexpectedError": "unexpected error"
 	},
 
 	"errors": {
 		"missingArgument": "⚠️ missing argument\n- usage: <code>{0}</code>",
-		"unexpectedError": "❌ error bruh"
+		"unexpectedError": "❌ error bruh\n- <code>{0}</code>"
 	},
 
 	"commands": {
