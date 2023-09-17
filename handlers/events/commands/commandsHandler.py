@@ -9,7 +9,7 @@ from lang import get_lang
 from .handlers import *
 
 
-async def commands_handler(message) -> None:
+async def commands_handler(client, message) -> None:
 	"""
 	Receives a message, if it starts with the prefix specified in the settings, then parses it into a command and arguments and then calls the necessary command.
 	Otherwise skips
@@ -42,7 +42,9 @@ async def commands_handler(message) -> None:
 		# list of commands and its arguments
 		commandsList = [
 			[Ping(), [message, args]],
-			[Help(), [message]]
+			[Help(), [message]],
+			[ExportPins(), [client, message, args]],
+			[MessageInfo(), [client, message, args]]
 		]
 
 		# checks that executed command exists and that this command enabled

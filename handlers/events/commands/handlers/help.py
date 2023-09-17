@@ -4,40 +4,41 @@ from configparser import ConfigParser
 
 from lang import get_lang
 
-from . import ping
+from . import ping, exportPins, messageInfo
 
 
-# reads settings file
+# reading settings file
 config = ConfigParser()
 config.read("data/settings.ini")
 
-# gets ;ang
+# resolving language
 lang = run(get_lang())
+helpLang = lang["commands"]["help"]
 
 
 class Help:
 	def __init__(self) -> None:
-		self.enabled: bool = True
-		self.aliases: tuple = ("help", )
-		self.usage: str = "-/{{command}}"
-		self.description: str = lang["commands"]["help"]["description"]
+		self.enabled: bool =	True
+		self.aliases: tuple =	("help", "h")
+		self.usage: str =		helpLang["usage"]
+		self.description: str =	helpLang["description"]
 
 
 	async def function(self, message):
 		"""
-		shows help message with all commands and some settings
+		showing help message with all commands and some settings
 		"""
 		# list of commands
-		commands = [self, ping.Ping()]
+		commands = [self, ping.Ping(), exportPins.ExportPins(), messageInfo.MessageInfo()]
 
 		commandsCards = []
 
-		# creates "cards" for every command
+		# creating "cards" for every command
 		for command in commands:
 			commandsCards.append(lang["commands"]["help"]["commandCard"].format(
 				", ".join(command.aliases), command.description, command.usage))
 
-		# builds response message text
+		# building response message text
 		responseText =	lang["commands"]["help"]["header"] + "\n\n" + \
 						lang["commands"]["help"]["settingsInfo"].format(
 							config["Commands"]["prefix"]) + "\n\n" + \

@@ -1,4 +1,6 @@
 {
+	"listElementSymbol": "-",
+
 	"terminalMessages": {
 		"selectedAccount": "using \"{0}\" account",
 		"onStartup": "logged up as @{0} (uid: {1})",
@@ -13,6 +15,7 @@
 
 	"commands": {
 		"ping": {
+			"usage": "-/{{passes amount}}",
 			"description": "Calculates the time required to edit the message",
 
 			"header": "🏓 Pong",
@@ -21,11 +24,32 @@
 			"multipleTestResults": "- average: <b>{0}</b>ms\n- min/max: <b>{1}</b>ms/<b>{2}</b>ms"
 		},
 		"help": {
+			"usage": "-/{{command}}",
 			"description": "Reveals this message",
 
 			"header": "📑 <b>Userbot's help message:</b>",
 			"settingsInfo": "Current prefix: \"{0}\"",
 			"commandCard": "⌨️ <b>{0}</b> - {1}\n - usage: <code>{2}</code>"
+		},
+		"exportPins": {
+			"usage": "{{messages amount}}",
+			"description": "Exports specified amount of pins",
+
+			"header": "📌 Pinned messages"
+		},
+		"messageInfo": {
+			"usage": "reply/{{message id}}",
+			"description": "Shows some info about message",
+
+			"header": "✉️ id: <code>{0}</code>",
+			"content": [
+				"length: <code>{0}</code> (-spaces:<code>{1}</code>)",
+				"sender: <code>{2}</code> (id:<code>{3}</code>)",
+				"chat: <code>{4}</code> (id:<code>{5}</code>)",
+				"date: <code>{6}</code>"
+			],
+
+			"chatIsDM": "DM"
 		}
 	}
 }
