@@ -1,2 +1,2 @@
 # tnbx_userbot
-mocha s govnom
+just a userbot for my needs
